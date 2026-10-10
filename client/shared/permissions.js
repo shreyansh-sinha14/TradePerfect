@@ -21,13 +21,13 @@ export const isManager = user => !!user && ['OPS_MANAGER','SYS_ADMIN'].includes(
 export const queueActions = (item,user) => ({
   canAssign: isManager(user) && ['OPEN','IN_PROGRESS'].includes(item.status),
   canApplyFix: !!user && ['OPS_USER','OPS_MANAGER','SYS_ADMIN'].includes(user.role) && item.status === 'IN_PROGRESS' && (isManager(user) || item.assigneeId === user.userId),
-  canResubmit: !!user && ['OPS_USER','OPS_MANAGER','SYS_ADMIN'].includes(user.role) && item.status === 'IN_PROGRESS' && item.priority === 'LOW' && (isManager(user) || item.assigneeId === user.userId),
+  canResubmit: !!user && ['OPS_USER','OPS_MANAGER','SYS_ADMIN'].includes(user.role) && item.status === 'IN_PROGRESS' && ['LOW','MEDIUM'].includes(item.priority) && (isManager(user) || item.assigneeId === user.userId),
   canReject: isManager(user) && item.priority === 'HIGH' && ['OPEN','IN_PROGRESS'].includes(item.status)
 });
 export const canEditTrade = (trade,user,queueItem=null) => {
   if (!trade || !user || trade.riskStatus === 'REJECTED' || trade.queueStatus === 'REJECTED') return false;
   if (['OPS_MANAGER','SYS_ADMIN'].includes(user.role)) return true;
-  if (user.role === 'TRADER') return trade.traderId === user.userId;
+  if (user.role === 'TRADER') return (trade.traderUserId ?? trade.traderId) === user.userId;
   if (user.role === 'OPS_USER') return !!queueItem && queueItem.assigneeId === user.userId && queueItem.status === 'IN_PROGRESS';
   return false;
 };
