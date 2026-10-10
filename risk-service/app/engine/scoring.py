@@ -46,6 +46,25 @@ READABLE = {"ssi": "SSI mismatch pattern", "currency": "Currency mismatch patter
             "ruleScore": "Combination of rule breaches"}
 
 
+# Rule IDs from the team plan (section 4.2). Labels only - points/weights are unchanged.
+RULE_IDS = {
+    "SSI not matched": "RS-01",
+    "Currency not matched": "RS-02",
+    "Settlement date in the past": "RS-03",
+    "Weekend settlement": "RS-04",
+    "Settlement more than 15 days away": "RS-05",
+    "Quantity above 5000": "RS-09",
+    "Quantity below 100": "RS-10",
+}
+TIER_RULE_IDS = {0.25: "RS-06", 0.20: "RS-07", 0.10: "RS-08"}
+
+
+def _rule_id(name, points):
+    if name == "High-failure counterparty tier":
+        return TIER_RULE_IDS.get(round(float(points), 2), "RS-06")
+    return RULE_IDS.get(name, "RULE")
+
+
 def _to_frame(trades):
     d = pd.DataFrame(trades)
     d["ssiMatched"] = d["ssiMatched"].astype(bool).astype(int)
@@ -115,7 +134,7 @@ def score_trades(trades, as_of_mode="TODAY"):
             "ruleScore": round(float(rule[i]), 4),
             "mlScore": None if mode == "RULES_ONLY" else round(float(ml[i]), 4),
             "scoringMode": mode,
-            "rulesTriggered": [{"name": k, "points": v} for k, v in fired.items()],
+            "rulesTriggered": [{"ruleId": _rule_id(k, v), "name": k, "points": v} for k, v in fired.items()],
             "riskFactors": factors,
             "likelyReason": reason,
             "suggestedAction": action,
