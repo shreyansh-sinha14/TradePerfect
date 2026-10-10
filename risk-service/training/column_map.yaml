@@ -1,0 +1,23 @@
+# Dataset column name  ->  our field name (used everywhere in code)
+# Matching ignores case, spaces at the ends and underscores, so "Trade ID", "trade_id", "TRADE ID" all work.
+# If EDA prints "unknown columns", add them here.
+columns:
+  "Trade ID": tradeId
+  "Trade Type": tradeType
+  "Symbol": symbol
+  "Quantity": quantity
+  "Price": price
+  "Counterparty": counterparty
+  "Trade Date": tradeDate
+  "Settlement Date": settlementDate
+  "Account ID": accountId
+  "SSI Matched": ssiMatched
+  "Currency Matched": currencyMatched
+  "Trader Name": traderName
+  "Settlement Failed": label          # target: YES = 1 (fail), NO = 0 (pass)
+
+yes_values: ["yes", "y", "true", "1"]
+no_values: ["no", "n", "false", "0"]
+
+# Date formats tried in order; the one that parses the most rows wins (per column)
+date_formats: ["%m/%d/%Y", "%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y", "%m-%d-%Y", "%d-%b-%Y", "%m/%d/%y", "%Y/%m/%d"]
