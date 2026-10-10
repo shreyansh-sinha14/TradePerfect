@@ -44,10 +44,23 @@ async function seedDatabase() {
     console.log("Symbols seeded.");
 
     await Counterparty.deleteMany({});
+    // Counterparties from the historical training data (same names the risk-service
+    // model uses for the counterparty tier rule, Decision Logic 3.2.5).
+    // Without these, the tier rule can never fire for a booked trade.
+    const HISTORICAL_COUNTERPARTIES = [
+      "BANK OF AMERICA", "BARCLAYS", "BARCLAYS WEALTH", "BLACKROCK", "BOFA SECURITIES",
+      "CAPITAL GROUP", "CENTERVIEW", "CHARLES SCHWAB", "CITIGROUP", "COMMERZBANK",
+      "CREDIT SUISSE", "DEUTSCHE BANK", "E*TRADE", "EVERCORE", "FIDELITY", "GOLDMAN SACHS",
+      "GOLDMAN SACHS ASSET MANAGEMENT", "HSBC", "ING GROUP", "INTERACTIVE BROKERS", "JEFFERIES",
+      "JPMORGAN CHASE", "LAZARD", "MIZUHO", "MOELIS", "MORGAN STANLEY", "NOMURA", "NORTHERN TRUST",
+      "PJT PARTNERS", "RAYMOND JAMES", "ROYAL BANK OF SCOTLAND", "SANTANDER", "SOCIETE GENERALE",
+      "STANDARD CHARTERED", "STATE STREET", "TOKYO MARINE", "UBS", "VANGUARD"
+    ];
     await Counterparty.insertMany([
       { code: "ABC_BANK", name: "ABC Bank", active: true },
       { code: "XYZ_CAPITAL", name: "XYZ Capital Corp", active: true },
-      { code: "BNP_PARIBAS", name: "BNP Paribas SA", active: true }
+      { code: "BNP_PARIBAS", name: "BNP Paribas SA", active: true },
+      ...HISTORICAL_COUNTERPARTIES.map((code) => ({ code, name: code, active: true }))
     ]);
     console.log("Counterparties seeded.");
 
