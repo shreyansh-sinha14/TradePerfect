@@ -10,6 +10,11 @@ import authRoutes from "./routes/auth.routes.js";
 import refRoutes from "./routes/ref.routes.js";
 import tradeRoutes from "./routes/trades.routes.js";
 import queueRoutes from "./routes/queue.routes.js";
+import dashboardRoutes from "./routes/dashboard.routes.js";
+import auditRoutes from "./routes/audit.routes.js";
+import usersRoutes from "./routes/users.routes.js";
+import healthRoutes from "./routes/health.routes.js";
+import { auth } from "./middleware/auth.js";
 
 const app = express();
 
@@ -34,10 +39,8 @@ app.use(express.json({ limit: "1mb" }));
 // 6. NoSQL Injection Protection
 app.use(mongoSanitize());
 
-// 7. Temporary Health Route (Will be moved to N-14 later)
-app.get("/api/v1/health", (req, res) => {
-  res.status(200).json({ status: "ok", db: "up", riskService: "pending", modelVersion: "v1" });
-});
+// 7. Health: real api + db + risk-service status
+app.use("/api/v1/health", healthRoutes);
 
 // 8. Mount Auth Routes (Module N-01)
 app.use("/api/v1/auth", authRoutes);
@@ -50,6 +53,15 @@ app.use("/api/v1/trades", tradeRoutes);
 
 // 11. Mount Queue Routes (Module N-07/N-08)
 app.use("/api/v1/queue", queueRoutes);
+
+// 11b. Dashboard, audit trail, users
+app.use("/api/v1/dashboard", dashboardRoutes);
+app.use("/api/v1/audit", auditRoutes);
+app.use("/api/v1/users", usersRoutes);
+
+// 11c. Notifications: nothing raises notifications yet (drift alerts are A3, not built),
+// so the bell gets an honest empty list instead of a 404 every minute.
+app.get("/api/v1/notifications", auth, (req, res) => res.status(200).json({ items: [], unread: 0 }));
 
 // 12. 404 Handler
 app.use((req, res, next) => next(notFound(`Route ${req.originalUrl} not found`)));
