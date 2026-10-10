@@ -1,0 +1,2 @@
+import {api,useMocks} from './client'; import {sleep} from './mockData';
+export const usersApi={async list(role='OPS_USER'){if(useMocks()){await sleep();return {items:[{userId:'u-ops-1',username:'ops_user',name:'Asha Patil',role:'OPS_USER',status:'ACTIVE'},{userId:'u-ops-2',username:'ops_user2',name:'Ravi Shah',role:'OPS_USER',status:'ACTIVE'}]};}return (await api.get(`/users${role?`?role=${encodeURIComponent(role)}`:''}`)).data;}};

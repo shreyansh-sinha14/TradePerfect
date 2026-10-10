@@ -1,0 +1,21 @@
+{
+  "jobId": "J000017",
+  "fileName": "trades.csv",
+  "status": "COMPLETED",
+  "asOfMode": "TODAY",
+  "total": 100,
+  "processed": 100,
+  "accepted": 95,
+  "rejected": 5,
+  "byStatus": {
+    "PASS": 80,
+    "MONITOR": 10,
+    "EXCEPTION": 4,
+    "REJECTED": 1,
+    "PENDING_SCORE": 0
+  },
+  "startedAt": "2026-10-10T09:00:00Z",
+  "finishedAt": "2026-10-10T09:01:00Z",
+  "error": null,
+  "rejectedReportSent": false
+}

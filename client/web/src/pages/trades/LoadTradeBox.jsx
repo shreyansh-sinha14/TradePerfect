@@ -1,0 +1,2 @@
+import React,{useState} from 'react';import {Button,Card,Form,Input,Space,message} from 'antd';import {useNavigate} from 'react-router-dom';
+export default function LoadTradeBox(){const [form]=Form.useForm();const n=useNavigate();return <Card size="small" title="Load existing trade"><Form form={form} layout="inline" onFinish={({tradeId})=>n(`/trades/${tradeId.trim()}`)}><Form.Item name="tradeId" rules={[{required:true,message:'Enter Trade ID'}]}><Input placeholder="Trade ID"/></Form.Item><Form.Item><Button htmlType="submit">Load</Button></Form.Item></Form></Card>;}

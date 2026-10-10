@@ -1,0 +1,37 @@
+{
+  "today": {
+    "date": "2026-10-10",
+    "total": 1200,
+    "counts": {
+      "PASS": 1080,
+      "MONITOR": 120,
+      "EXCEPTION": 60,
+      "REJECTED": 20,
+      "PENDING_SCORE": 0
+    },
+    "pct": {
+      "PASS": 0.9,
+      "MONITOR": 0.1,
+      "EXCEPTION": 0.05,
+      "REJECTED": 0.017,
+      "PENDING_SCORE": 0
+    }
+  },
+  "historical": {
+    "total": 100000,
+    "counts": {
+      "PASS": 90000,
+      "MONITOR": 6000,
+      "EXCEPTION": 3000,
+      "REJECTED": 1000,
+      "PENDING_SCORE": 0
+    },
+    "pct": {
+      "PASS": 0.9,
+      "MONITOR": 0.06,
+      "EXCEPTION": 0.03,
+      "REJECTED": 0.01,
+      "PENDING_SCORE": 0
+    }
+  }
+}

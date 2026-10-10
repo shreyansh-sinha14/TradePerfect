@@ -1,0 +1,14 @@
+{
+  "total": 0,
+  "byStatus": {
+    "OPEN": 0,
+    "IN_PROGRESS": 0,
+    "RESOLVED": 0,
+    "REJECTED": 0
+  },
+  "byPriority": {
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 0
+  }
+}

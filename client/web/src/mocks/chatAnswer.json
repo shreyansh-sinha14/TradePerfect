@@ -1,0 +1,14 @@
+{
+  "answer": "ABC_BANK had 1,812 failed settlements in the historical data.",
+  "data": {
+    "counterparty": "ABC_BANK",
+    "failedCount": 1812,
+    "totalCount": 9450,
+    "currentExceptions": 37
+  },
+  "toolsUsed": [
+    "count_failures_by_counterparty"
+  ],
+  "disclaimer": "Numbers come from the database; AI wrote the sentence.",
+  "fallbackUsed": false
+}

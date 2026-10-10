@@ -1,0 +1,2 @@
+import React from 'react';import {Progress,Tooltip} from 'antd';import {fmtScore} from '../utils/format';
+export default function RiskScore({value,status,compact=false}){if(value===null||value===undefined)return <Tooltip title="Scoring pending"><span>Pending</span></Tooltip>;const n=Number(value);return compact?<Tooltip title={`Risk score ${fmtScore(n)}`}><span>{fmtScore(n)}</span></Tooltip>:<div><div className="risk-score">{fmtScore(n)}</div><Progress percent={Math.max(0,Math.min(100,n*100))} showInfo={false} status={status==='REJECTED'?'exception':'normal'}/></div>;}

@@ -1,0 +1,13 @@
+import trade from '../mocks/trade.json';
+import tradesList from '../mocks/tradesList.json';
+import dashboardSummary from '../mocks/dashboardSummary.json';
+import dashboardPatterns from '../mocks/dashboardPatterns.json';
+import queueList from '../mocks/queueList.json';
+import queueStats from '../mocks/queueStats.json';
+import auditTimeline from '../mocks/auditTimeline.json';
+import auditLatest from '../mocks/auditLatest.json';
+import uploadJob from '../mocks/uploadJob.json';
+import chatAnswer from '../mocks/chatAnswer.json';
+export const mock = {trade,tradesList,dashboardSummary,dashboardPatterns,queueList,queueStats,auditTimeline,auditLatest,uploadJob,chatAnswer};
+export const sleep = (ms=180)=>new Promise(r=>setTimeout(r,ms));
+export const clone = v=>JSON.parse(JSON.stringify(v));

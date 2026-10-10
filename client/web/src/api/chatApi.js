@@ -1,0 +1,2 @@
+import {api,useMocks} from './client';import {mock,sleep,clone} from './mockData';
+export const chatApi={async ask(message,sessionId){if(useMocks()){await sleep(500);return {...clone(mock.chatAnswer),answer:message.toLowerCase().includes('settlement')?mock.chatAnswer.answer:'This is a mock assistant response. Connect the backend to retrieve database-backed answers.',sessionId};}return (await api.post('/chat',{message,sessionId})).data;}};

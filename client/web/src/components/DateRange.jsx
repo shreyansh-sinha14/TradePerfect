@@ -1,0 +1,2 @@
+import React from 'react';import {DatePicker,Space} from 'antd';import dayjs from 'dayjs';
+export default function DateRange({from,to,onChange}){return <Space><DatePicker placeholder="From" value={from?dayjs(from):null} onChange={d=>onChange(d?.format('YYYY-MM-DD')||'',to)} allowClear/><DatePicker placeholder="To" value={to?dayjs(to):null} onChange={d=>onChange(from,d?.format('YYYY-MM-DD')||'')} allowClear/></Space>;}

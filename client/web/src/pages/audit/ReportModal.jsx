@@ -1,0 +1,2 @@
+import React from 'react';import {Form,Input,Modal} from 'antd';
+export default function ReportModal({open,onCancel,onOk,loading}){const [form]=Form.useForm();return <Modal title="Generate audit PDF report" open={open} onCancel={onCancel} onOk={()=>form.validateFields().then(v=>onOk(v.sendTo))} confirmLoading={loading}><Form form={form} layout="vertical"><Form.Item name="sendTo" label="Email recipient (optional)" rules={[{type:'email',message:'Enter a valid email address'}]}><Input placeholder="auditor@bank.com"/></Form.Item></Form></Modal>;}
