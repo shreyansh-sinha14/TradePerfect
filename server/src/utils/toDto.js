@@ -44,5 +44,16 @@ export const toTradeRowDTO = (t) => ({
   riskStatus: t.riskStatus,
   priority: t.priority,
   riskScore: t.riskScore,
-  queueId: t.queueId
+  queueId: t.queueId,
+  queueStatus: t.queueStatus,
+  rejectionReasons: t.rejectionReasons,
+  // Grid columns FR-RQ-008 (no SHAP/raw model data - keeps the grid light)
+  score: t.score ? {
+    finalScore: t.score.finalScore,
+    likelyReason: t.score.likelyReason,
+    suggestedAction: t.score.suggestedAction,
+    riskFactors: t.score.riskFactors,
+    explanation: t.score.explanation,
+    scoringMode: t.score.scoringMode
+  } : null
 });
